@@ -5,6 +5,7 @@ import com.amardeep.utils.AppUtils;
 
 public class StudentPayload extends BasePayload {
 	private String name;
+	private Double gpa;
 	
 	public String getName() {
 		return name;
@@ -12,7 +13,12 @@ public class StudentPayload extends BasePayload {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	public Double getGpa() {
+		return gpa;
+	}
+	public void setGpa(Double gpa) {
+		this.gpa = gpa;
+	}
 	public Student getStudentEntity(StudentPayload payload){
 		Student student=new Student();
 		AppUtils.getMapper().map(payload,student);

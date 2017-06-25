@@ -30,7 +30,7 @@ public class Course implements BaseEntity {
 	private Student students;
 
 	@Override
-	public long getId() {
+	public Long getId() {
 		return this.id;
 	}
 	public String getName() {
