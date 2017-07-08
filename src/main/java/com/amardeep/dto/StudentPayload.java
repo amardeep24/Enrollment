@@ -22,6 +22,7 @@ public class StudentPayload extends BasePayload {
 	public Student getStudentEntity(StudentPayload payload){
 		Student student=new Student();
 		AppUtils.getMapper().map(payload,student);
+		student.setId(null);
 		return student;
 	}
 	

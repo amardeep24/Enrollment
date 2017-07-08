@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,13 +30,13 @@ public class StudentController {
 	StudentService service;
 	
 	
-	@GetMapping("student/{id}")
+	@GetMapping(value="student/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Student> getStudent(@PathVariable("id") long id){
 		logger.info("####getStudent invoked with id####"+id);
 		return new ResponseEntity<Student>(service.getStudent(id),HttpStatus.OK);
 		
 	}
-	@PostMapping("student")
+	@PostMapping(value="student/", consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Student> createStudent(@RequestBody StudentPayload studentPayload,UriComponentsBuilder builder){
 		logger.info("####createStudent invoked ####");
 		Student student=studentPayload.getStudentEntity(studentPayload);
@@ -44,7 +45,7 @@ public class StudentController {
 		headers.setLocation(builder.path("/student/{id}").buildAndExpand(student.getId()).toUri());
 		return new ResponseEntity<Student>(student,headers,HttpStatus.CREATED);
 	}
-	@PutMapping("student/{id}")
+	@PutMapping(value="student/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Student> updateStudent(@PathVariable("id") long id,@RequestBody StudentPayload studentPayload){
 		logger.info("####updateStudent invoked####");
 		Student student=studentPayload.getStudentEntity(studentPayload);
@@ -52,7 +53,7 @@ public class StudentController {
 		service.updateStudent(student);
 		return new ResponseEntity<Student>(HttpStatus.OK);
 	}
-	@DeleteMapping("student/{id}")
+	@DeleteMapping(value="student/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Student> deleteStudent(@PathVariable("id") long id){
 		logger.info("####deleteStudent invoked with id####"+id);
 		service.deleteStudent(id);

@@ -14,13 +14,13 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan("com.amardeep")
 @EnableAutoConfiguration
-public class DemoApplication {
+public class Enrollment {
 
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(Enrollment.class, args);
 	}
 	
 	@Bean
