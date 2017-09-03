@@ -1,5 +1,7 @@
 package com.amardeep.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
@@ -39,6 +41,16 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public void deleteStudent(long id) {
 		studentRepository.deleteEntity(id);
+	}
+
+	@Override
+	public List<Student> findStudentsByGpa(double gpa) {
+		return studentRepository.findStudentsByGpa(gpa);
+	}
+
+	@Override
+	public List<Student> findStudentsByCourse(List<String> courses) {
+		return studentRepository.findStudentsByCourse(courses);
 	}
 
 }

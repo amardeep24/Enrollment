@@ -20,6 +20,10 @@ public abstract class AbstractEntityRepository<T> implements EntityRepository<T>
 	private EntityManager entityManager;
 	
 	
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
 	public T getEntity(long id){
 		return entityManager.find(getType(),id);
 	}

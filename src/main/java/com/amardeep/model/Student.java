@@ -7,14 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.amardeep.constants.DomainConstants;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="STUDENT")
+@NamedQueries({
+	@NamedQuery(name="Student.findStudentsByGpa",query=DomainConstants.STUDENTS_BY_GPA)
+})
 public class Student implements BaseEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="studentSeq")

@@ -1,6 +1,8 @@
 package com.amardeep.controller;
 
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +34,20 @@ public class StudentController {
 	
 	@GetMapping(value="student/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Student> getStudent(@PathVariable("id") long id){
-		logger.info("####getStudent invoked with id####"+id);
+		logger.info("####getStudent invoked with id####",id);
 		return new ResponseEntity<Student>(service.getStudent(id),HttpStatus.OK);
+		
+	}
+	@GetMapping(value="student/find/gpa/{gpa}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Student>> findStudentsByGpa(@PathVariable("gpa") double gpa){
+		logger.info("####findStudentsByGpa invoked with gpa####",gpa);
+		return new ResponseEntity<List<Student>>(service.findStudentsByGpa(gpa),HttpStatus.OK);
+		
+	}
+	@GetMapping(value="student/find/course/", produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Student>> findStudentsByCourse(@RequestBody List<String> courses){
+		logger.info("####findStudentsByCourse invoked with courses####",courses);
+		return new ResponseEntity<List<Student>>(service.findStudentsByCourse(courses),HttpStatus.OK);
 		
 	}
 	@PostMapping(value="student/", consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
